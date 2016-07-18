@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html ng-app="corredor3.0">
+	<head>
+		<base href="/">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Interior-Design-Responsive-Website-Templates-Edge">
+		<meta name="author" content="webThemez.com">
+		<title>Sistema Corredor</title>
+		<link rel="favicon" href="assets/images/favicon.png">
+		<!--<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">-->
+		<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+		<link rel='stylesheet' id='camera-css'  href='assets/css/camera.css' type='text/css' media='all'>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.min.css"  media="all"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap-switch.css"  media="all"/>
+		<link rel="stylesheet" type="text/css" href="css/ionicons.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/owl.carousel.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/owl.theme.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/owl.transitions.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/animate.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/datepicker.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/datepicker3.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/datepicker3.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/bootstrap.icon-large.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/full-slider.css"/>
+		
+		<!--<link type="text/css" href="css/export.css" rel="stylesheet">-->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap/jasny-bootstrap.min.css" media="all"/>
+		<link rel="stylesheet" type="text/css" href="css/corredor.css"/>
+		<script type="text/javascript" src="lib/jquery-1.11.1.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui.min.js"></script>
+		<script src="lib/bootstrap.min.js"></script>
+		<script src="lib/bootstrap-datepicker.min.js"></script>
+
+		<!--  -->
+		<script src="lib/angular.js"></script>
+		<script src="lib/angular-route.js"></script>
+		<script src="lib/angular-resource.js"></script>
+		<script src="lib/jquery.numeric.js"></script>
+		<!--  -->
+		<script src="js/app.js"></script>
+		<script src="js/controllers.js"></script>
+		<script src="js/controllers/loginCtrl.js"></script>
+		<script src="js/controllers/homeCtrl.js"></script>
+		<script src="js/controllers/tomadorCtrl.js"></script>
+		<script src="js/controllers/polizaCtrl.js"></script>
+		<script src="js/controllers/historicoCtrl.js"></script>
+		<script src="js/controllers/reportesCtrl.js"></script>
+		<script src="js/controllers/datosPersonalesCtrl.js"></script>
+		
+		<script src="js/services.js"></script>
+		<script src="js/services/loginServ.js"></script>
+		<script src="js/services/homeServ.js"></script>
+		<script src="js/services/tomadorServ.js"></script>
+		<script src="js/services/polizaServ.js"></script>
+		<script src="js/services/historicoServ.js"></script>
+		<script src="js/services/reportesServ.js"></script>
+		<script src="js/services/datosPersonalesServ.js"></script>
+		
+		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+		<!--[if lt IE 9]>
+		<script src="assets/js/html5shiv.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+	<body ng-controller="indexController">
+		<!-- Navigation -->
+		 <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="menu">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#home">Sistema Corredor</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav" id="menuCorredor1">
+                    <li>
+                        <a href="" data-toggle="modal" data-target="#modalLogin">Login</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="" data-spy="scroll" data-target="#contacto">Contact</a>
+                    </li>
+                </ul>
+                <ul id="menuCorredor2" class="nav navbar-nav">
+						<li><a href="#datosPoliza">Polizas</a></li>
+						<li><a ng-click="cerrarSesion()"href="">Cerrar Sesion</a></li>
+						<li><a href="#reportes">Reportes</a></li>
+						<li><a href="#datosPersonales">Datos Personales</a></li>
+
+					</ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+					<!-- Full Page Image Background Carousel Header -->
+					<header  id="myCarousel" class="carousel slide">
+						<!-- Indicators -->
+						<ol class="carousel-indicators">
+							<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+							<li data-target="#myCarousel" data-slide-to="1"></li>
+							<li data-target="#myCarousel" data-slide-to="2"></li>
+						</ol>
+						<!-- Wrapper for Slides -->
+						<div class="carousel-inner">
+							<div class="item active">
+								<!-- Set the first background image using inline CSS below. -->
+								<div class="fill banner" style="background-image:url('/img/logoCompleto.png');"></div>
+								<div class="carousel-caption">
+									<h2>Caption 1</h2>
+								</div>
+							</div>
+							<div class="item">
+								<!-- Set the second background image using inline CSS below. -->
+								<div class="fill banner" style="background-image:url('');"></div>
+								<div class="carousel-caption">
+									<h2>Caption 2</h2>
+								</div>
+							</div>
+							<div class="item">
+								<!-- Set the third background image using inline CSS below. -->
+								<div class="fill banner" style="background-image:url('');"></div>
+								<div class="carousel-caption">
+									<h2>Caption 3</h2>
+								</div>
+							</div>
+						</div>
+						<!-- Controls -->
+						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+							<span class="icon-prev"></span>
+						</a>
+						<a class="right carousel-control" href="#myCarousel" data-slide="next">
+							<span class="icon-next"></span>
+						</a>
+					</header>
+					<div class="container">
+						
+						
+						<!-- <div id="includeHome" ng-include src="'views/login.html'" class="heightCls"></div>
+						
+						<!-- Modal Opciones-->
+						<div class="modal fade" id="modalOpciones" role="dialog">
+							<div class="modal-dialog">
+								
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										<h4 class="modal-title">Nutrival</h4>
+									</div>
+									<div class="modal-body">
+										<div id="contenidoModal">
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-gris" data-dismiss="modal">Cancelar</button>
+										<button id="modal_aceptar" type="button" class="btn btn-danger" data-dismiss="modal">Aceptar</button>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+						
+						<div id="includeHome" ng-include src="'views/login.html'" class="heightCls"></div>
+						
+					</div>
+					<div id="vistasHtml">
+						<ng-view></ng-view>
+					</div>
+					
+					<script type="text/javascript">
+					$(document).ready(function(){
+					$("#vistasHtml").css({"margin-top":$('#menu').height()}); //+20
+					});
+					</script>
+					<script>
+					$('.carousel').carousel({
+					interval: 2000 //changes the speed
+					})
+					</script>
+				</body>
+			</html>
