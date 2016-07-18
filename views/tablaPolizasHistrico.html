@@ -1,0 +1,51 @@
+  <div  id="tablaPolizas" class="table-responsive tableEstilo" style=" background-color: white;"> 
+  <table id="tablaPol" class="table table-hover table-bordered">
+   	   <thead>
+   	   <tr style="background: rgb(234, 234, 234);">
+            <th>Numero de Poliza</th>
+            <th>Empresa</th>
+            <th>Ramo</th>
+            <th>Anulacion</th>
+            <th>Fecha Anulacion</th>
+            <th >Fecha Inicio</th>            
+            <th>Fecha Vigencia</th>
+            <th>Interediario</th>            
+            <th>Numero de Financiamiento</th>
+            <th>Tipo de Financiamiento</th>
+            <th>Prima</th>
+            <th>Comision</th>
+            <th>Bono</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr ng-repeat="polizaHistorico in  polizaHistoricos "> 
+           <td data-title="Numero de Poliza">{{polizaHistorico.numero_poliza}}</td>
+           <td data-title="Empresa">{{polizaHistorico.aseguradora}}</td>
+           <td data-title="Ramo">{{polizaHistorico.ramo}}</td>
+           <td data-title="Anulacion">{{polizaHistorico.anulada}}</td>
+            <td data-title="Fecha Anulacion">{{polizaHistorico.fecha_anulacion}}</td>
+           <td nowrap data-title="Fecha Inicio">{{polizaHistorico.fecha_inicio}}</td>
+           <td nowrap data-title="Fecha Vigencia">{{polizaHistorico.fecha_vigencia}}</td>
+           <td nowrap data-title="Interediario">{{polizaHistorico.nombre}} {{polizaHistorico.apellido}}</td>
+           <td data-title="Numero de Financiamiento">{{polizaHistorico.numero_financiamiento}}</td>
+           <td data-title="Tipo de Financiamiento">inicial:{{polizaHistorico.inicial}}% Cuotas: {{polizaHistorico.cuotas}}</td>
+           <td data-title="Prima">{{cambiarPuntosComas(valida(polizaHistorico.prima))}}</td>
+           <td data-title="Comision">{{cambiarPuntosComas(valida(polizaHistorico.comision))}}</td>
+           <td data-title="Bono">{{cambiarPuntosComas(valida(polizaHistorico.bono))}}</td>
+       </tr>
+       </tbody>
+  </table>
+  </div>
+  <!--<div class="col-md-12 text-center">
+   <ul class="pagination pagination-lg pager">
+	   	<li ng-class="prevPageDisabled()">
+	   		<a href ng-click="prevPage()">« Anterior</a>
+	   	</li>
+	   	<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+	   		<a href >{{n+1}}</a>
+	   	</li>
+	   	<li ng-class="nextPageDisabled()">
+	   		<a href ng-click="nextPage()">Siguiente »</a>
+	   	</li>
+   </ul>
+  </div>-->

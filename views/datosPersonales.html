@@ -1,0 +1,155 @@
+<div class="container">
+	<div class="row">
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs responsive" role="tablist">
+<!--        <li class="active">
+            <a href="" role="tab" data-toggle="tab" data-target="#home">
+                <icon class="fa fa-home"></icon> Home
+            </a>
+        </li>-->
+        <li class="active"><a href="" role="tab" data-toggle="tab" data-target="#perfil">
+            <i class="fa fa-user"></i> Perfil
+            </a>
+        </li>
+        <li>
+            <a href="" role="tab" data-toggle="tab" data-target="#seguridad">
+                <i class="fa fa-envelope"></i> Seguridad
+            </a>
+        </li>
+        <li>
+            <a href="" role="tab" data-toggle="tab" data-target="#intermediarios">
+                <i class="fa fa-cog"></i> Intermediarios
+            </a>
+        </li>
+      </ul>
+      
+      <!-- Tab panes -->
+      <div class="tab-content">
+  <!--       <div class="tab-pane fade active in" id="home">
+            <h2>Home Content Goes Here</h2>
+        </div>-->
+        <div class="tab-pane fade active in" id="perfil">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <span>Datos Personales</span>
+              </div>
+              <div class="panel-body">
+                <form id="ModificarDatosPerfil" name="ModificarDatosPerfil" valida-formulario="" novalidate>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': ModificarDatosPerfil.$submitted && ModificarDatosPerfil.nombreUsuario.$invalid}">
+                        <label for="nombreUsuario">Nombre</label><span ng-show="ModificarDatosPerfil.$submitted && ModificarDatosPerfil.nombreUsuario.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="nombreUsuario" id="nombreUsuario" ng-model="nombreUsuario" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': ModificarDatosPerfil.$submitted &&    ModificarDatosPerfil.apelldoUsuario.$invalid}" >
+                        <label for="apelldoUsuario">Apellido</label><span ng-show="ModificarDatosPerfil.$submitted && ModificarDatosPerfil.apelldoUsuario.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="apelldoUsuario" id="apelldoUsuario" ng-model="apelldoUsuario" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': ModificarDatosPerfil.$submitted &&    ModificarDatosPerfil.ciUsuario.$invalid}">
+                        <label for="ciUsuario">Cedula</label><span ng-show="ModificarDatosPerfil.$submitted && ModificarDatosPerfil.ciUsuario.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="ciUsuario" id="ciUsuario" ng-model="ciUsuario" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': ModificarDatosPerfil.$submitted &&    ModificarDatosPerfil.correoUsuario.$invalid}">
+                        <label for="correoUsuario">Correo</label><span ng-show="ModificarDatosPerfil.$submitted && ModificarDatosPerfil.correoUsuario.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="correoUsuario" id="correoUsuario" ng-model="correoUsuario" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-12">
+                        <input id="guardarDatos" class="btn btn-danger" type="submit" ng-disabled="(ModificarDatosPerfil.$submitted && ModificarDatosPerfil.$invalid)" value="Guardar">
+                      </div>
+                </form>
+              </div>
+           </div>
+        </div>
+        <div class="tab-pane fade" id="seguridad">
+           <div class="panel panel-primary">
+              <div class="panel-heading">
+                <span>Cambio de clave</span>
+              </div>
+              <div class="panel-body">
+                <form id="cambioClaveUsuario" name="cambioClaveUsuario" valida-formulario="" novalidate>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': cambioClaveUsuario.$submitted && cambioClaveUsuario.nuevaClave.$invalid}">
+                        <label for="nuevaClave">Nueva Clave</label><span ng-show="cambioClaveUsuario.$submitted && cambioClaveUsuario.nuevaClave.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="nuevaClave" id="nuevaClave" ng-model="nuevaClave" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': cambioClaveUsuario.$submitted &&    cambioClaveUsuario.nuevaClaveRep.$invalid}" >
+                        <label for="nuevaClaveRep">Repetir Clave</label><span ng-show="cambioClaveUsuario.$submitted && cambioClaveUsuario.nuevaClaveRep.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="nuevaClaveRep" id="nuevaClaveRep" ng-model="nuevaClaveRep" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-12">
+                        <input id="guardarDatos" class="btn btn-danger" type="submit" ng-disabled="(cambioClaveUsuario.$submitted && cambioClaveUsuario.$invalid)" value="Guardar">
+                      </div>
+                </form>
+              </div>
+              <div class="panel-heading">
+                <span>Pregunta de seguridad</span>
+              </div>
+              <div class="panel-body">
+                <form id="cambioPreguntaSeg" name="cambioPreguntaSeg" valida-formulario="" novalidate>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': cambioPreguntaSeg.$submitted && cambioPreguntaSeg.preguntaSec.$invalid}">
+                        <label for="nuevaClave">Nueva Clave</label><span ng-show="cambioPreguntaSeg.$submitted && cambioPreguntaSeg.preguntaSec.$invalid" class="text-danger fontHist">*</span>
+                        <select name='preguntaSec' ng-change="montoNegocioInter(preguntaSec)" id='preguntaSec' ng-model="preguntaSec" required class="form-control form-control-gray" ng-selected="preguntaSec.id==preguntaSec">
+                        <option value="">Seleccione</option>
+                        <option ng-repeat="preguntaSec in preguntasSec" value="{{preguntaSec.id}}">{{preguntaSec.descripcion}}</option>
+                      </select>
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': cambioPreguntaSeg.$submitted &&    cambioPreguntaSeg.respuestaPreg.$invalid}" >
+                        <label for="respuestaPreg">Respuesta</label><span ng-show="cambioPreguntaSeg.$submitted && cambioPreguntaSeg.respuestaPreg.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="respuestaPreg" id="respuestaPreg" ng-model="respuestaPreg" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-12">
+                        <input id="guardarDatos" class="btn btn-danger" type="submit" ng-disabled="(cambioPreguntaSeg.$submitted && cambioPreguntaSeg.$invalid)" value="Guardar">
+                      </div>
+                </form>                
+              </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="intermediarios">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                <span>Cambio de clave</span>
+              </div>
+              <div class="panel-body">
+            <div class="col-md-6 col-xs-12">
+                <form id="insertarModificarInter" name="insertarModificarInter" valida-formulario="" novalidate>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': insertarModificarInter.$submitted && insertarModificarInter.nombreUsuarioInter.$invalid}">
+                        <label for="nombreUsuarioInter">Nombre</label><span ng-show="insertarModificarInter.$submitted && insertarModificarInter.nombreUsuarioInter.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="nombreUsuarioInter" id="nombreUsuarioInter" ng-model="nombreUsuarioInter" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': insertarModificarInter.$submitted &&    insertarModificarInter.apelldoUsuarioInter.$invalid}" >
+                        <label for="apelldoUsuarioInter">Apellido</label><span ng-show="insertarModificarInter.$submitted && insertarModificarInter.apelldoUsuarioInter.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="apelldoUsuarioInter" id="apelldoUsuarioInter" ng-model="apelldoUsuarioInter" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': insertarModificarInter.$submitted &&    insertarModificarInter.ciUsuarioInter.$invalid}">
+                        <label for="ciUsuarioInter">Cedula</label><span ng-show="insertarModificarInter.$submitted && insertarModificarInter.ciUsuarioInter.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="ciUsuarioInter" id="ciUsuarioInter" ng-model="ciUsuarioInter" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': insertarModificarInter.$submitted &&    insertarModificarInter.correoUsuarioInter.$invalid}">
+                        <label for="correoUsuarioInter">Correo</label><span ng-show="insertarModificarInter.$submitted && insertarModificarInter.correoUsuarioInter.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="correoUsuarioInter" id="correoUsuarioInter" ng-model="correoUsuarioInter" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': insertarModificarInter.$submitted &&    insertarModificarInter.telefonoPrincipalInter.$invalid}">
+                        <label for="telefonoPrincipalInter">Telef. Principal</label><span ng-show="insertarModificarInter.$submitted && insertarModificarInter.telefonoPrincipalInter.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="telefonoPrincipalInter" id="telefonoPrincipalInter" ng-model="telefonoPrincipalInter" placeholder="" class="form-control form-control-gray">
+                      </div>
+                      <div class="col-md-6 col-xs-12" ng-class="{'has-error': insertarModificarInter.$submitted &&    insertarModificarInter.telefonoAdicionalInter.$invalid}">
+                        <label for="telefonoAdicionalInter">Telef. Adicional</label><span ng-show="insertarModificarInter.$submitted && insertarModificarInter.telefonoAdicionalInter.$invalid" class="text-danger fontHist">*</span>
+                        <input type="text" numerosValida required name="telefonoAdicionalInter" id="telefonoAdicionalInter" ng-model="telefonoAdicionalInter" placeholder="" class="form-control form-control-gray">
+                      </div>   
+                      <div class="col-md-12 col-xs-12" >
+                        <label for="permisosIntermediario">Permisos</label>
+                        <input type="text" numerosValida required name="permisosIntermediario" id="permisosIntermediario" ng-model="permisosIntermediario" placeholder="" class="form-control form-control-gray">
+                      </div>                                                               
+                      <div class="col-md-12">
+                        <input id="guardarDatos" class="btn btn-danger" type="submit" ng-disabled="(insertarModificarInter.$submitted && insertarModificarInter.$invalid)" value="Guardar">
+                      </div>
+                </form>
+              </div>
+            </div>
+          </div>
+            <div class="col-md-6 col-xs-12">
+            </div>
+        </div>
+      </div>
+    </div>
+    
+</div>
+

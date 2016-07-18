@@ -1,0 +1,55 @@
+  <div  id="tablaPolizas" class="table-responsive tableEstilo" style=" background-color: white;"> 
+  <table id="tablaPol" class="table table-hover table-bordered">
+   	   <thead>
+   	   <tr style="background: rgb(234, 234, 234);">
+   	   		<!--<th></th>-->
+   	   		<th></th>            
+            <th>Numero de Polizas</th>
+            <th>Empresa</th>
+            <th>Ramo</th>
+            <th>Anulacion</th>
+            <th>Fecha Anulacion</th>
+            <th >Fecha Inicio</th>            
+            <th>Fecha Vigencia</th>
+            <th>Interediario</th>            
+            <th>Numero de Financiamiento</th>
+            <th>Tipo de Financiamiento</th>
+            <th>Prima</th>
+            <th>Comision</th>
+            <th>Bono</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr ng-repeat="poliza in  polizas | offset: currentPage*itemsPerPage | limitTo: itemsPerPage"> 
+       	  <!-- <td data-title=""><a href=""><span class="glyphicon glyphicon-trash"></span></a></td> -->
+       	   <td data-title=""><a title="Editar" href="" ng-click="modificarPolizaTabla(poliza.id)" ><span  class="glyphicon glyphicon-pencil"></span></a></td>
+           <td data-title="Numero de Poliza">{{poliza.numero_poliza}}</td>
+           <td data-title="Empresa">{{poliza.aseguradora}}</td>
+           <td data-title="Ramo">{{poliza.ramo}}</td>
+           <td data-title="Anulacion">{{poliza.anulada}}</td>
+            <td data-title="Fecha Anulacion">{{poliza.fecha_anulacion}}</td>
+           <td nowrap data-title="Fecha Inicio">{{poliza.fecha_inicio}}</td>
+           <td nowrap data-title="Fecha Vigencia">{{poliza.fecha_vigencia}}</td>
+           <td nowrap data-title="Interediario">{{poliza.nombre}} {{poliza.apellido}}</td>
+           <td data-title="Numero de Financiamiento">{{poliza.numero_financiamiento}}</td>
+           <td data-title="Tipo de Financiamiento">inicial:{{poliza.inicial}}% Cuotas: {{poliza.cuotas}}</td>
+           <td data-title="Prima">{{cambiarPuntosComas(valida(poliza.prima))}}</td>
+           <td data-title="Comision">{{cambiarPuntosComas(valida(poliza.comision))}}</td>
+           <td data-title="Bono">{{cambiarPuntosComas(valida(poliza.bono))}}</td>
+       </tr>
+       </tbody>
+  </table>
+  </div>
+  <div class="col-md-12 text-center">
+   <ul class="pagination pagination-lg pager">
+	   	<li ng-class="prevPageDisabled()">
+	   		<a href ng-click="prevPage()">« Anterior</a>
+	   	</li>
+	   	<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+	   		<a href >{{n+1}}</a>
+	   	</li>
+	   	<li ng-class="nextPageDisabled()">
+	   		<a href ng-click="nextPage()">Siguiente »</a>
+	   	</li>
+   </ul>
+  </div>

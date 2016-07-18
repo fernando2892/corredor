@@ -1,0 +1,50 @@
+/* CSS Document */
+footer{
+	 position: fixed;
+     bottom: 0;
+     left: 0;
+	 width:100%;
+	 z-index:999999;
+     max-width:100%;
+	 background: linear-gradient(45deg, rgba(76,76,76,1) 0%,rgba(89,89,89,1) 12%,rgba(102,102,102,1) 25%,rgba(71,71,71,1) 39%,rgba(44,44,44,1) 	 50%,rgba(0,0,0,1) 51%,rgba(17,17,17,1) 60%,rgba(43,43,43,1) 76%,rgba(28,28,28,1) 91%,rgba(19,19,19,1) 100%);
+	 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', endColorstr='#131313',GradientType=1 );
+	 box-shadow:1px 0px 10px 0px black inset;
+  	 -webkit-box-shadow:1px 0px 10px 0px black inset;
+  	 -moz-box-shawdow:1px 0px 10px 0px black inset;
+	 text-align:center;
+	 color:white;
+	 font-family:"Times New Roman", Times, serif;
+	 height:35px;
+}
+body{
+	background-color:#069;
+}
+.footer{
+	margin-top:12px;
+}
+#formLogin{	
+padding:20px;
+width: 25%;
+background:rgba(0,0,0,0.5);
+min-width:220px;
+text-align: center;
+margin: 0 auto;
+margin-top: 20%;
+margin-right:20px;
+}
+@media (max-width: 767px)  {
+#formLogin{	
+padding:20px;
+width: 25%;
+min-width:220px;
+text-align: center;
+margin: 0 auto;
+margin-top: 35%;
+/*margin-top: 250px;
+margin-right: 50px;	*/
+}
+}
+
+
+
+

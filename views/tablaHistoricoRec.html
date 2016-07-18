@@ -1,0 +1,35 @@
+  <div  id="tablaPolizasHistRec" class="table-responsive tableEstilo" style=" background-color: white;"> 
+  <table id="tablaPol" class="table table-hover table-bordered">
+   	   <thead>
+   	   <tr style="background: rgb(234, 234, 234);">
+            <th>Prima</th>
+            <th>Comision</th>
+            <th>Bono</th>
+            <th>Fecha de Cobro</th>
+            <th>Numero de Recibo</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr ng-repeat="polizaHistoricoRec in  polizaHistoricoRecs "> 
+           <td data-title="prima">{{polizaHistoricoRec.monto_prima}}</td>
+           <td data-title="comision">{{polizaHistoricoRec.comision}}</td>
+           <td data-title="bono">{{polizaHistoricoRec.bono}}</td>
+           <td data-title="fecha cobro">{{polizaHistoricoRec.fecha_cobro}}</td>
+            <td data-title="numero recibo">{{polizaHistoricoRec.numero_recibo}}</td>
+       </tr>
+       </tbody>
+  </table>
+  </div>
+  <!--<div class="col-md-12 text-center">
+   <ul class="pagination pagination-lg pager">
+	   	<li ng-class="prevPageDisabled()">
+	   		<a href ng-click="prevPage()">« Anterior</a>
+	   	</li>
+	   	<li ng-repeat="n in range()" ng-class="{active: n == currentPage}" ng-click="setPage(n)">
+	   		<a href >{{n+1}}</a>
+	   	</li>
+	   	<li ng-class="nextPageDisabled()">
+	   		<a href ng-click="nextPage()">Siguiente »</a>
+	   	</li>
+   </ul>
+  </div>-->

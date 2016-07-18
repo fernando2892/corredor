@@ -1,0 +1,70 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-2 col-xs-2">
+			<h3>Reportes</h3>
+			<hr>
+		</div>
+	</div>
+	
+<div class="col-md-12 col-xs-12 ">
+	<div class="panel panel-primary">
+			<div class="row">
+
+				<div class="col-md-4 col-xs-12 ">
+
+					<label for="tipoReporte">Tipo de reporte</label><span ng-show="formPoliza.$submitted && formPoliza.empresa.$invalid"class="text-danger fontHist"> *</span>
+					<select name='tipoReporte' id='tipoReporte' ng-model="tipoReporte" required class="form-control form-control-gray" ng-selected="tipoReporte.id==tipoReporte">
+						<option value="">Seleccione</option>
+						<option ng-repeat="tipoReporte in tipoReportes" value="{{tipoReporte.id}}">{{empresa.descripcion}}</option>
+					</select>
+
+				</div>
+				<div class="col-md-4 col-xs-12 ">
+
+					<label for="tipoReporte">Fecha Desde</label><span ng-show="formPoliza.$submitted && formPoliza.empresa.$invalid"class="text-danger fontHist"> *</span>
+					<div class="input-group input-append date" id="fechaDesdeDp">
+					<input type='text' id='fechaDesde' name='fechaDesde' ng-model="fechaDesde" required class="form-control"/>
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+
+
+				</div>
+				<div class="col-md-4 col-xs-12 ">
+
+					<label for="tipoReporte">Fecha Hasta</label><span ng-show="formPoliza.$submitted && formPoliza.empresa.$invalid"class="text-danger fontHist"> *</span>
+					<div class="input-group input-append date" id="fechaHastaDp">
+					<input type='text' id='fechaHasta' name='fechaHasta' ng-model="fechaHasta" required class="form-control"/>
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+					</div>
+
+
+				</div>
+				<div class="col-md-12 col-xs-12 center ">
+
+					<button id="generarReporte" class="boton btn" data-toggle="modal" data-target="#vistaReporte">Generar</button>
+
+				</div>																
+
+			</div>
+	</div>
+
+</div>
+
+<!-- modal reporte pdf-->
+<div class="modal fade" id="vistaReporte" role="dialog">
+<div class="modal-dialog" style="width: 90	%;">
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #BDB3B3;border-radius: 7px 7px 0px 0px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Reportes</h4>
+		</div>
+		<div class="modal-body" >
+			
+			
+			
+		</div>
+		
+	</div>
+</div>
+</div>

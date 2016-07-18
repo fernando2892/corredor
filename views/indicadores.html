@@ -1,0 +1,65 @@
+<div id="enlaceHomePad" class="enlaceHomePad">
+  	<a id="cartaCredito_cancelar" href="#home" class="enlaceHome" >Inicio</a>
+</div>  
+
+<div id="reportes" class="tab-content">
+
+	<div class="tab-pane fade in active">
+
+<div  class="panel panel-primary">
+		<div class="row">
+			<form >
+				<div class="col-md-3" id="divModuloReporte">
+					<label for="ModuloReporte">Modulo</label> 
+					<select	id="ModuloReporte" ng-selected="{{ModuloReporte == ModuloReporte}}" name="ModuloReporte" class="form-control" ng-change="TipoReportes()" ng-model="ModuloReporte">
+						<option value="0" >Seleccione</option>
+						<option value="1" >Importacion</option>
+						<option value="2" >Distribucion</option>
+					</select>
+				</div>
+				
+				<div class="col-md-3">
+					<label for="TipoEmpresa">Empresa</label> 
+					<select id="TipoEmpresa" ng-disabled="desabilitarSelIndi" name="TipoEmpresa" ng-selected="empresa.id == TipoEmpresa" class="form-control"  ng-model="TipoEmpresa">
+						<option  value="0">Seleccione</option>
+						<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.descripcion}}</option>
+					</select>
+				</div>
+
+
+				<div class="col-md-3">
+					<label for="TipoReporte">Reporte</label> 
+					<select id="TipoReporte" name="TipoReporte" ng-disabled="desabilitarSelIndi" ng-selected="Reportes.id == TipoReporte" class="form-control" ng-change="ocultarDivReportes()" ng-model="TipoReporte">
+						<option  value="0">Seleccione</option>
+						<option ng-repeat="Reportes in Reporte" value="{{Reportes.id}}">{{Reportes.descripcion}}</option>
+					</select>
+				</div>
+				
+				
+				<div class="col-md-3">
+					<label for="TipoOrden">Ordenar</label> 
+					<select id="TipoOrden" name="TipoOrden" ng-disabled="desabilitarSelIndi || desabilitarSelIndiOrd" ng-selected="ordenes.id == TipoOrden" class="form-control"  ng-model="TipoOrden">
+						<option  value="0">Seleccione</option>
+						<option ng-repeat="ordenes in orden" value="{{ordenes.id}}">{{ordenes.descripcion}}</option>
+					</select>
+				</div>
+
+				<div id="filtros" ng-hide="ocultarDiv" ></div>
+				<div class="col-md-12" style="text-align: center;">
+				<button ng-click="imprimirReporte()" ng-disabled="desabilitarBtnReporte" class="btn btn-danger">Generar Reporte</button>
+				</div>
+				</form>
+		</div>
+		
+		</div>
+
+	</div>
+
+</div>
+<div id="btnRegreso"><button class="btn btn-danger" ng-click="btnAtrasReporte()">Reportes</button>
+<!-- <img alt="Exportar PDF" ng-model="exportPDF" title="Exportar PDF" src="img/pdf.png" ng-click="ExportarReporte(TipoReporte,exportPDF)"> -->
+<img alt="Exportar XLSX" ng-model="exportXLSX" title="Exportar XLSX" src="img/XLSX.png" ng-click="ExportarReporte(TipoReporte,exportXLSX)">
+</div>
+		<div id="mostrarReporteContent"> 
+		<div id="mostrarReporte" ></div>
+		</div>

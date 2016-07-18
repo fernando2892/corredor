@@ -1,0 +1,99 @@
+<!-- Modal Login-->
+<div class="modal fade" id="modalTomador" role="dialog" ng-controller="tomadorController">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="background-color: #BDB3B3;border-radius: 7px 7px 0px 0px;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Datos Clientes</h4>
+			</div>
+			<div class="modal-body">
+				<ul class="nav nav-tabs" role="tablist">
+					<li id="adultoForm" role="presentation" class="active"><a   ng-click="formAdultoAct()" style="cursor: pointer" role="tab" data-toggle="tab">Adultos</a></li>
+					<li role="presentation"><a ng-click="formNinoAct()" style="cursor: pointer"  role="tab" data-toggle="tab">Niños</a></li>
+				</ul>
+				<form id="formClientes" name="formClientes" valida-formulario="insertarModificarTomador()" novalidate>
+					<div class="row">
+						<div class="col-md-6" ng-hide="formNino" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_ci.$invalid}">
+							<label for="tomador_ci">Cedula</label><span ng-show="formClientes.$submitted && formClientes.tomador_ci.$invalid" class="text-danger fontHist">*</span>
+							<input type="text" name="tomador_ci" id="tomador_ci" ng-model="tomador_ci" placeholder=""  ng-required="reqCiAdulto" class="form-control form-control-gray" ng-keyup="consultarCliente(ocultarPT)">
+						</div>
+						<div class="col-md-6" ng-show="formNino" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_ci_parent.$invalid}">
+							<label for="tomador_ci_parent">Cedula Representante</label><span ng-show="formClientes.$submitted && formClientes.tomador_ci_parent.$invalid" class="text-danger fontHist">*</span>
+							<input type="text" ng-required="reqCiRepre" name="tomador_ci_parent" id="tomador_ci_parent" ng-model="tomador_ci_parent" placeholder="" class="form-control form-control-gray" ng-blur="validaCiRepresentado()">
+						</div>
+						<div class="col-md-6" ng-show="formNino">
+							<label for="tomador_ci_representado">Cedula Representado</label>
+							<input type="text" name="tomador_ci_representado" id="tomador_ci_representado" disabled="" ng-model="tomador_ci_representado" placeholder="" class="form-control form-control-gray" ng-keyup="">
+							<input type="hidden" name="tomador_menor" id="tomador_menor" ng-model="tomador_menor">
+						</div>
+						<div class="col-md-6" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_nombre.$invalid}">
+							<label for="tomador_nombre">Nombre</label><span ng-show="formClientes.$submitted && formClientes.tomador_nombre.$invalid" class="text-danger fontHist">*</span>
+							<input type="text" required name="tomador_nombre" ng-model="tomador_nombre" id="tomador_nombre" placeholder="" class="form-control form-control-gray">
+						</div>
+						<div class="col-md-6"  ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_apellido.$invalid}">
+							<label for="tomador_apellido">Apellido</label><span ng-show="formClientes.$submitted && formClientes.tomador_apellido.$invalid" class="text-danger fontHist">*</span>
+							<input type="text" required name="tomador_apellido" ng-model="tomador_apellido" id="tomador_apellido" placeholder="" class="form-control form-control-gray">
+						</div>
+						<div class="col-md-6" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_sexo.$invalid}">
+							<label for="tomador_sexo">Sexo</label><span ng-show="formClientes.$submitted && formClientes.tomador_sexo.$invalid" class="text-danger fontHist">*</span>
+							<div id="contentSexo" style="">
+								<label class="btn btn-default" style="width: 48%;">
+									<input type="radio" required name="tomador_sexo" ng-model="tomador_sexo" id="tomador_sexo"  value="M" ng-checked="seleccionSexoM" ng-change="seleccionSexo('M')">
+									Masculino
+								</label>
+								<label class="btn btn-default" style="width: 48%;">
+									<input type="radio" required name="tomador_sexo" ng-model="tomador_sexo" id="tomador_sexo"  value="F" ng-checked="seleccionSexoF" ng-change="seleccionSexo('F')">
+									Femenino
+								</label>
+							</div>
+						</div>
+						<div class="col-md-6" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_correo.$invalid}">
+							<label for="tomador_correo">Correo</label><span ng-show="formClientes.$submitted && formClientes.tomador_correo.$invalid" class="text-danger fontHist">*</span>
+							<input type="text" required name="tomador_correo" ng-model="tomador_correo" id="tomador_correo" placeholder="" class="form-control form-control-gray">
+						</div>
+						<div class="col-md-6" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_telefono.$invalid}">
+							<label for="tomador_telefono">Telefono</label><span ng-show="formClientes.$submitted && formClientes.tomador_telefono.$invalid" class="text-danger fontHist">*</span>
+							<input type="text" required name="tomador_telefono" ng-model="tomador_telefono" id="tomador_telefono" placeholder="" class="form-control form-control-gray">
+						</div>
+						<div class="col-md-6">
+							<label for="tomador_correo">Telefono Adicional</label>
+							<input type="text" name="tomador_telefonoA" ng-model="tomador_telefonoA" id="tomador_telefonoA" placeholder="" class="form-control form-control-gray">
+						</div>
+						<div class="col-md-6" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_fechaNac.$invalid}">
+							<label for="tomador_fechaNac">Fecha de Nacimiento</label><span ng-show="formClientes.$submitted && formClientes.tomador_fechaNac.$invalid" class="text-danger fontHist">*</span>
+							<div class="input-group input-append date" id="embarque_fechaZarpeDP">
+								<input type='text' id='tomador_fechaNac' required name='tomador_fechaNac' ng-model="tomador_fechaNac" class="form-control"/>
+								<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+							</div>
+						</div>
+						<div class="col-md-6" ng-class="{'has-error': formClientes.$submitted && formClientes.Parentesco.$invalid}">
+							<label for="Parentesco">Parentesco</label><span ng-show="formClientes.$submitted && formClientes.Parentesco.$invalid" class="text-danger fontHist">*</span>
+							<select name='Parentesco' id='Parentesco' required ng-model="Parentesco" class="form-control form-control-gray" ng-selected="Parentesco==parentesco.id">
+								<option value="">Seleccione</option>
+								<option ng-repeat="Parentesco in Parentescos" value="{{Parentesco.id}}">{{Parentesco.descripcion}}</option>
+							</select>
+						</div>
+						<div class="col-md-6">
+							<label ></label>
+							<label class="btn btn-default" style="width:100%;margin-bottom: 8px !important;">
+								<input type="checkbox" name="tomador" required ng-model="tomador" id="tomador">
+								Tomador
+							</label>
+						</div>
+						<div class="col-md-12" ng-class="{'has-error': formClientes.$submitted && formClientes.tomador_direccion.$invalid}">
+							<label for="tomador_direccion">Dirección</label><span ng-show="formClientes.$submitted && formClientes.tomador_direccion.$invalid" class="text-danger fontHist">*</span>
+							<textarea name="tomador_direccion" required ng-model="tomador_direccion" id="tomador_direccion" placeholder="" class="form-control form-control-gray"></textarea>
+							<input type="hidden" name="tomador_id" id="tomador_id" ng-model="tomador_id">
+						</div>
+					</div>
+					<div class="row form-inline panelBoton" align="center">
+						<input id="tomador_guardar" class="btn btn-danger" type="submit" value="Guardar">
+						<button type="button" class="btn btn-gris" data-dismiss="modal">Cerrar</button>
+					</div>
+				</form>
+			</div>
+			
+		</div>
+	</div>
+</div>

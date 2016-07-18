@@ -1,0 +1,297 @@
+<div  class="panel panel-primary row">
+<div class="col-md-12" id="menuPol">
+	<ul class="nav nav-tabs" role="tablist" style="border-bottom: 0;"> <!--pills   nav-justified  -->
+	<!--   <li id="imp_nuevo"><a href="#nueva_proforma">Nuevo</a></li> -->
+	<li id="polizaFormFiltros" role="presentation" class="active"><a style="cursor: pointer;" ng-click="mostrarTab2()" href="" role="tab" data-toggle="tab">Cartera</a></li>
+	<li id="polizaForm" role="presentation" ><a style="cursor: pointer;" ng-click="mostrarTab1(0)" href="" role="tab" data-toggle="tab" >Poliza</a></li>
+	<li id="documentosPol" role="presentation"><a style="cursor: pointer;" href="" ng-click="mostrarTab4()" role="tab" data-toggle="tab">Carga de Documentos</a></li>
+</ul>
+</div>
+<!--data-toggle="modal" data-target="#modalTomador"-->
+<div id="includePoliza" ng-include src="'views/tomador.html'" class="heightCls" ng-controller="tomadorController"></div>
+
+<div id="tabPolizaContent" class="col-md-12" >
+<form id="formPoliza" name="formPoliza" valida-formulario="insertarModificarPoliza()" novalidate>
+	<div class="panel panel-primary">
+		<div class="row">
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.numPol.$invalid}">
+				<label for="numPol">Numero de Poliza</label><span ng-show="formPoliza.$submitted && formPoliza.numPol.$invalid"class="text-danger fontHist"> *</span>
+				<input type='text' id='numPol' name='numPol' required ng-model="numPol" class="form-control" ng-keyup="consultarExistenciaPol()"/>
+			</div>
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.empresa.$invalid }">
+				<label for="empresa">Empresa Aseguradora</label><span ng-show="formPoliza.$submitted && formPoliza.empresa.$invalid"class="text-danger fontHist"> *</span>
+				<select name='empresa' id='empresa' ng-model="empresa" required class="form-control form-control-gray" ng-selected="empresa.id==empresa">
+					<option value="">Seleccione</option>
+					<option ng-repeat="empresa in empresas" value="{{empresa.id}}">{{empresa.descripcion}}</option>
+				</select>
+			</div>
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.ramo.$invalid}">
+				<label for="ramo">Ramo</label><span ng-show="formPoliza.$submitted && formPoliza.ramo.$invalid"class="text-danger fontHist"> *</span>
+				<select name='ramo' id='ramo' ng-model="ramo" required class="form-control form-control-gray" ng-selected="ramo.id==ramo">
+					<option value="">Seleccione</option>
+					<option ng-repeat="ramo in ramos" value="{{ramo.id}}">{{ramo.descripcion}}</option>
+				</select>
+			</div>
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.fechaInicio.$invalid}">
+				<label for="fechaInicio">Fecha de Inicio</label><span ng-show="formPoliza.$submitted && formPoliza.fechaInicio.$invalid"class="text-danger fontHist"> *</span>
+				<div class="input-group input-append date" id="fechaInicioDP">
+					<input type='text' id='fechaInicio' name='fechaInicio' ng-model="fechaInicio" required class="form-control"/>
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<label for="fechaVigencia">Fecha de Vigencia</label>
+				<div class="input-group input-append date" id="fechaVigenciaDP">
+					<input type='text' id='fechaVigencia' disabled="" name='fechaVigencia' ng-model="fechaVigencia" class="form-control"/>
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<label for="tipoFinanciamiento">Tipo de Financiamiento</label>
+				<div class="input-group input-append">
+					<select name='tipoFinanciamiento'  id='tipoFinanciamiento' ng-selected="tipoFinanciamiento.id==tipoFinanciamiento" class="form-control form-control-gray" ng-model="tipoFinanciamiento">
+						<option value="0">Seleccione</option>
+						<option ng-repeat="tipoFinanciamiento in tipoFinanciamientos" value="{{tipoFinanciamiento.id}}">
+						Inicial {{tipoFinanciamiento.inicial}}% Cuotas:{{tipoFinanciamiento.cuotas}}</option>
+					</select>
+					<span class="input-group-addon add-on" ><a  href id="btn_abrirModal_financiamiento" data-toggle="modal" data-target="#modalFinanciamineto" ng-click="nuevoFinanciamiento()"><span  class="glyphicon glyphicon-plus"></span></a></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<label for="numFinanciamiento">Numero de Financiamiento</label>
+				<input type='text' id='numFinanciamiento' name='numFinanciamiento' ng-model="numFinanciamiento" class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.intermediario.$invalid}">
+				<label for="intermediario">Intermediario</label><span ng-show="formPoliza.$submitted && formPoliza.intermediario.$invalid" class="text-danger fontHist">*</span>
+				<select name='intermediario' ng-change="montoNegocioInter(intermediario)" id='intermediario' ng-model="intermediario" required class="form-control form-control-gray" ng-selected="intermediario.id==intermediario">
+					<option value="">Seleccione</option>
+					<option ng-repeat="intermediario in intermediarios" value="{{intermediario.id}}">{{intermediario.nombre}} {{intermediario.apellido}}</option>
+				</select>
+			</div>			
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.montoPrima.$invalid}">
+				<label for="montoPrima">Monto de Prima</label><span ng-show="formPoliza.$submitted && formPoliza.montoPrima.$invalid" class="text-danger fontHist">*</span>
+				<input type='text' id='montoPrima'  name='montoPrima' ng-model="montoPrima" required class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.montoComision.$invalid}">
+				<label for="montoComision">Monto de Comision</label><span ng-show="formPoliza.$submitted && formPoliza.montoComision.$invalid" class="text-danger fontHist">*</span>
+				<input type='text' id='montoComision' ng-keyup="comisionReal()" name='montoComision' ng-model="montoComision" required class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.montoBono.$invalid}">
+				<label for="montoBono">Monto de Bono</label><span ng-show="formPoliza.$submitted && formPoliza.montoBono.$invalid" class="text-danger fontHist">*</span>
+				<input type='text' id='montoBono' ng-keyup="bonoRealPol()" name='montoBono' ng-model="montoBono" required class="form-control"/>
+			</div>
+			
+
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.fechaCobro.$invalid}">
+				<label for="fechaCobro">Fecha de Cobro</label><span ng-show="formPoliza.$submitted && formPoliza.fechaCobro.$invalid" class="text-danger fontHist">*</span>
+				<div class="input-group input-append date" id="fechaCobroDP">
+					<input type='text' id='fechaCobro' required name='fechaCobro' ng-model="fechaCobro" class="form-control"/>
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+				</div>
+			</div>	
+			<div class="col-md-4" ng-class="{'has-error': formPoliza.$submitted && formPoliza.numRecibo.$invalid}">
+				<label for="numRecibo">Numero de Recibo</label><span ng-show="formPoliza.$submitted && formPoliza.numRecibo.$invalid" class="text-danger fontHist">*</span>
+				<input type='text' required id='numRecibo' name='numRecibo' ng-model="numRecibo" class="form-control"/>
+			</div>					
+			<div class="col-md-4">
+				<label ></label>
+				<label class="btn btn-default" style="width:100%;margin-bottom: 6px !important;">
+					<input type="checkbox" name="Anulacion" ng-model="Anulacion" id="Anulacion" ng-change="mostrarFechaVencimiento()">
+					Anulacion
+				</label>
+			</div>
+			<div class="col-md-4" ng-show="varSession.corredor">
+				<label for="comiReal">Comision Real</label>
+				<input type='text' id='comiReal' disabled="" name='comiReal' ng-model="comiReal" class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-show="varSession.corredor">
+				<label for="bonoReal">Bono Real</label>
+				<input type='text' id='bonoReal' disabled="" name='bonoReal' ng-model="bonoReal" class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-show="varSession.corredor">
+				<label for="montoInter">Monto Negocio</label>
+				<input type='text' id='montoInter' disabled="" name='montoInter' ng-model="montoInter" class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-show="varSession.corredor">
+				<label for="gastoAdmin">Gastos Administrativos</label>
+				<input type='text' id='gastoAdmin' disabled="" name='gastoAdmin' ng-model="gastoAdmin" class="form-control"/>
+			</div>
+			<div class="col-md-4" ng-show="varSession.corredor">
+				<label for="montoIsrl">ISLR</label>
+				<input type='text' id='montoIsrl' disabled="" name='montoIsrl' ng-model="montoIsrl" class="form-control"/>
+			</div>
+			<div class="col-md-4" id="fechaVencimiento" ng-class="{'has-error': formPoliza.$submitted && formPoliza.fechaAnulacion.$invalid}">
+				<label for="fechaAnulacion">Fecha de Anulacion</label><span ng-show="formPoliza.$submitted && formPoliza.fechaAnulacion.$invalid" class="text-danger fontHist">*</span>
+				<div class="input-group input-append date" id="fechaAnulacionDP">
+					<input type='text' ng-required="anulacionReq" id='fechaAnulacion' name='fechaAnulacion' ng-model="fechaAnulacion" class="form-control"/>
+					<span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+					<input type="hidden" name="idPol" id="idPol" ng-model="idPol" value="">
+					<input type="hidden" name="idDatosPol" id="idDatosPol" ng-model="idDatosPol" value="">
+					<input type="hidden" name="idReciboPol" id="idReciboPol" ng-model="idReciboPol" value="">
+				</div>
+			</div>
+			
+		</div>
+		<!--ng-click="insertarModificarPoliza()"-->
+		<div class="row form-inline panelBoton" align="center">
+			<div>
+				<span ng-show="formPoliza.$submitted && formPoliza.$invalid"class="text-danger fontHist">Campo(s) Requeridos *</span>
+			</div>
+			<input id="poliza_guardar" type="submit" class="btn btn-primary" ng-disabled="(formPoliza.$submitted && formPoliza.$invalid)" value="Guardar">
+			<button id="tomador_guardar" ng-disabled="(beneficiariosMostrar)" class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalTomador" ng-click="agregarModificarClientes()">Agregar Asegurados</button>
+			<button id="Recibos" ng-disabled="(beneficiariosMostrar)" data-toggle="modal" data-target="#historicoRecibosTabla" class="btn btn-danger" ng-click="consultaReciboHistorico()" type="button">Recibos</button>
+			<button id="Beneficiarios" data-toggle="modal" data-target="#modalTablaUsuario"  ng-click="mostrarOcultarBeneficiarios()" ng-disabled="(beneficiariosMostrar)" class="btn btn-danger" type="button">Beneficiarios</button>
+			<button id="Renovacion" ng-disabled="(deshabilitarRenovacion)"ng-click="renovarPoliza()" class="btn btn-primary" type="button">Renovar Poliza</button>
+			<button id="AgregarRecibo" ng-click="agregaRecibo()" ng-disabled="(beneficiariosMostrar)" data-toggle="modal" data-target="#AgregarReciboForm"  class="btn btn-danger" type="button">Agregar Recibo</button>
+			<button id="historicoPol" ng-click="consultaPolizaHistorico()" ng-disabled="(beneficiariosMostrar)" data-toggle="modal" data-target="#historicoPolTabla"  class="btn btn-danger" type="button">Historico</button>
+			<button id="cancelarAccion" ng-click="cancelarAccion()" ng-show="cancelarAccionPol"  class="btn btn-primary" type="button">Cancelar</button>
+		</div>
+	</div>
+</form>
+
+</div>
+<div id="clientesPoliza">
+	<div id="includeBen" ng-include src="'views/beneficiariosTabla.html'"></div>
+</div>
+<!--///////////////////////////////////////////////////////////////consulta tabs////////////////////////////////////////////////////////////-->
+<div id="tabConsutaContent" class="col-md-12" >
+	<div class="panel panel-primary">
+    <div class="row">
+      <div class="col-md-3">
+        <label for="numPol">Numero de Poliza</label>
+        <input type="text" name="numPolFil" id="numPolFil" ng-keyup="consultarPolizasFiltrosWhere()" ng-model="numPolFil" class="form-control"> 
+      </div>
+      <div class="col-md-3">
+        <label for="numPol">Numero de Financiamiento</label>
+        <input type="text" name="numFinFil" id="numFinFil" ng-keyup="consultarPolizasFiltrosWhere()" ng-model="numFinFil" class="form-control"> 
+      </div>  
+      <div class="col-md-3">
+        <label for="numPol">Numero de Recibo</label>
+        <input type="text" name="numRecFil" id="numRecFil" ng-keyup="consultarPolizasFiltrosWhere()" ng-model="numRecFil" class="form-control"> 
+      </div> 
+      <div class="col-md-3">
+        <label for="fechaIniFil">Fecha de Inicio</label>
+        <div class="input-group input-append date" id="fechaIniFilDp">
+          <input type='text' id='fechaIniFil' name='fechaIniFil' ng-model="fechaIniFil" class="form-control"/>
+          <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>  
+      <div class="col-md-3">
+        <label for="fechaHasFil">Fecha de Hasta</label>
+        <div class="input-group input-append date" id="fechaHasFilDp">
+          <input type='text' id='fechaHasFil' name='fechaHasFil' ng-model="fechaHasFil" class="form-control"/>
+          <span class="input-group-addon add-on"><span class="glyphicon glyphicon-calendar"></span></span>
+        </div>
+      </div>                   
+    </div>
+  </div>
+<div id="includeTabPol" ng-include src="'views/tablaPolizas.html'"></div>
+</div>
+<!--///////////////////////////////////////////////////////////////cuarto tabs////////////////////////////////////////////////////////////-->
+<div id="tabpPolizaDocumentosContent" class="col-md-12">
+<form id="formDocumentosPoliza" enctype="multipart/form-data">
+	<div class="panel panel-primary">
+		<div class="row">
+			<div class="col-md-3">
+				<label for="numPol">Numero de Poliza</label>
+				<input type='file' id='file_array' name='file_array' valida-Archivo="file_array" class="form-control" multiple/>
+			</div>
+			
+		</div>
+		<div class="row form-inline panelBoton" align="center">
+			<button id="tomador_guardar" class="btn btn-danger" type="sutmit" ng-click="GuardarArchivos()">Guardar</button>
+			<button id="tomador_guardar" class="btn btn-danger" type="button" data-toggle="modal" data-target="#modalTomador">Agregar Asegurados</button>
+		</div>
+	</div>
+</form>
+</div>
+</div>
+<!--modal financiamiento nuevo-->
+<div class="modal fade" id="modalFinanciamineto" role="dialog">
+<div class="modal-dialog">
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #BDB3B3;border-radius: 7px 7px 0px 0px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Nuevo Financiamiento</h4>
+		</div>
+		<div class="modal-body">
+			<form id="formFinanciamiento" name="formFinanciamiento" valida-formulario="insertarFinanciamiento()" novalidate>
+				<div class="row">
+					<div class="col-md-6" ng-class="{'has-error': formFinanciamiento.$submitted && formFinanciamiento.inicialFin.$invalid}">
+						<label for="inicialFin">Porcentaje Inicial</label><span ng-show="formFinanciamiento.$submitted && formFinanciamiento.inicialFin.$invalid" class="text-danger fontHist">*</span>
+						<input type="text" numerosValida required name="inicialFin" id="inicialFin" ng-model="inicialFin" placeholder="" class="form-control form-control-gray" ng-keyup="consultarCliente()">
+					</div>
+					<div class="col-md-6" ng-class="{'has-error': formFinanciamiento.$submitted && formFinanciamiento.cuotasFin.$invalid}">
+						<label for="cuotasFin">Numero de Cuotas</label><span ng-show="formFinanciamiento.$submitted && formFinanciamiento.cuotasFin.$invalid" class="text-danger fontHist">*</span>
+						<input type="text" numerosValida required name="cuotasFin" ng-model="cuotasFin" id="cuotasFin" placeholder="" class="form-control form-control-gray">
+					</div>
+					
+				</div>
+				<div class="row form-inline panelBoton" align="center">
+					<div>
+					<span ng-show="formFinanciamiento.$submitted && formFinanciamiento.$invalid" class="text-danger fontHist">Campos requeridos*</span>
+					</div>
+					<input id="financiamineto_guardar" class="btn btn-danger" type="submit" ng-disabled="(formFinanciamiento.$submitted && formFinanciamiento.$invalid)" value="Guardar">
+					<button type="button" class="btn btn-gris" data-dismiss="modal">Cerrar</button>
+				</div>
+			</form>
+		</div>
+		
+	</div>
+</div>
+</div>
+<!--modal tablausuarios nuevo-->
+<div class="modal fade" id="modalTablaUsuario" role="dialog">
+<div class="modal-dialog" style="width: 90%;">
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #BDB3B3;border-radius: 7px 7px 0px 0px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Tomador/Beneficiarios</h4>
+		</div>
+		<div class="modal-body">
+			
+			<div id="includeBen" ng-include src="'views/beneficiariosTabla.html'"></div>
+			
+		</div>
+		
+	</div>
+</div>
+</div>
+<!-- div historico polizas-->
+<div class="modal fade" id="historicoPolTabla" role="dialog">
+<div class="modal-dialog" style="width: 90%;">
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #BDB3B3;border-radius: 7px 7px 0px 0px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Historico Renovaciones</h4>
+		</div>
+		<div class="modal-body" >
+			
+			<div id="includeHis" ng-include src="'views/tablaPolizasHistrico.html'" ng-controller="historicoController"></div>
+			
+		</div>
+		
+	</div>
+</div>
+</div>
+<!-- div historico recibos-->
+<div class="modal fade" id="historicoRecibosTabla" role="dialog">
+<div class="modal-dialog" style="width: 50%;">
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header" style="background-color: #BDB3B3;border-radius: 7px 7px 0px 0px;">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Historico Recibos</h4>
+		</div>
+		<div class="modal-body" >
+			
+			<div id="includeHis" ng-include src="'views/tablaHistoricoRec.html'" ng-controller="historicoController"></div>
+			
+		</div>
+		
+	</div>
+</div>
+</div>

@@ -1,0 +1,37 @@
+<div  id="tablaBeneficiarios" class="table-responsive tableEstilo"> 
+  <table id="tablaBen" class="table table-hover table-bordered">
+   	   <thead>
+   	   <tr style="background: rgb(234, 234, 234);">
+   	   		<th></th>
+   	   		<th></th>            
+            <th>Cedula</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Parentesco</th>
+            <th>Tomador</th>
+            <th>Correo</th>
+            <th>Direccion</th>            
+            <th>Telefono</th>
+            <th>Telf.Adicional</th>            
+            <th>Fecha de Nacimiento</th>
+       </tr>
+       </thead>
+       <tbody>
+       <tr ng-repeat="beneficiario in  beneficiarios"> 
+       	   <td data-title=""><a href=""><span class="glyphicon glyphicon-trash"></span></a></td> 
+       	   <td data-title=""><a href="" ng-click="modificarClientePoliza(beneficiario)" data-toggle="modal" data-target="#modalTomador"><span class="glyphicon glyphicon-pencil"></span></a></td>
+           <td data-title="cedula">{{beneficiario.ci}}</td>
+           <td data-title="nombre">{{beneficiario.nombre}}</td>
+           <td data-title="apellido">{{beneficiario.apellido}}</td>
+           <td data-title="parentesco">{{beneficiario.parentDes}}</td>
+            <td data-title="tomador">{{beneficiario.tomador}}</td>
+		       <td data-title="correo">{{beneficiario.correo}}</td>
+           <td nowrap data-title="direccion">{{beneficiario.direccion}}</td>
+           <td nowrap data-title="telf">{{beneficiario.telefono_principal}}</td>
+           <td nowrap data-title="telf.A">{{beneficiario.telefono_adicional}}</td>
+           <td data-title="fecha.Nac">{{beneficiario.fecha_nacimiento}}</td>
+       </tr>
+       </tbody>
+  </table>
+  </div>
+  
